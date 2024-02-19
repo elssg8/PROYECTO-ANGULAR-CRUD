@@ -18,7 +18,7 @@ RUN npm install
 COPY . .
 
 # Expone el puerto en el que la aplicación se ejecutará 
-EXPOSE 3000
+EXPOSE 4000
 
 # Compila la aplicación
 RUN npm i -g typescript

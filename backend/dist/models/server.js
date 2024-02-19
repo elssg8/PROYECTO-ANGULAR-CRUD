@@ -19,7 +19,7 @@ const connection_1 = __importDefault(require("../db/connection"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
-        this.port = process.env.PORT || '3001';
+        this.port = process.env.PORT || '4000';
         this.listen();
         this.middlewares();
         this.routes();
@@ -40,19 +40,20 @@ class Server {
     }
     middlewares() {
         //Parseamos el body
-        this.app.use(express_1.default.json());
+        this.app.use(express_1.default.json()); //Para que el servidor entienda formato JSON
         //CORS
-        this.app.use((0, cors_1.default)());
+        this.app.use((0, cors_1.default)()); //Para que el servidor acepte peticiones de otros servidores
     }
+    //Conectar a la base de datos
     dbConnect() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield connection_1.default.authenticate();
-                console.log('Base de datos conectada');
+                yield connection_1.default.authenticate(); //Probamos la conexion
+                console.log('Base de datos conectada'); //Si se conecta, mostramos un mensaje    
             }
-            catch (error) {
-                console.log(error);
-                console.log('Error al conectarse a la base de datos');
+            catch (error) { //Si no se conecta, mostramos un mensaje de error
+                console.log(error); //Mostramos el error
+                console.log('Error al conectarse a la base de datos'); //Mostramos un mensaje de error
             }
         });
     }
